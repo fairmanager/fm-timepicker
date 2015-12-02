@@ -565,7 +565,7 @@
 						scope.select = function( timestamp, elementIndex ) {
 							// Construct a moment instance from the UNIX offset.
 							var time;
-							if( moment.tz ) {
+							if( moment.tz && scope.reference.tz() ) {
 								time = moment( timestamp ).tz( scope.reference.tz() );
 							} else {
 								time = moment( timestamp );
