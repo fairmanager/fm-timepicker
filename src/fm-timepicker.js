@@ -278,7 +278,7 @@
 					           "  </div>" +
 					           "</div>",
 					replace  : true,
-					restrict : "E",
+					restrict : "EA",
 					scope    : {
 						ngModel       : "=",
 						format        : "=?",
