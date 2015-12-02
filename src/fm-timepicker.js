@@ -255,12 +255,12 @@
 					           "        <span class='glyphicon glyphicon-minus'></span>" +
 					           "      </button>" +
 					           "    </span>" +
-					           "    <input type='text' class='form-control' ng-model='time' ng-keyup='handleKeyboardInput($event)' ng-change='update()'>" +
+					           "    <input type='text' class='form-control' ng-model='time' ng-keyup='handleKeyboardInput($event)' ng-change='update()' ng-disabled='{{fmDisabled()}}'>" +
 					           "    <span class='input-group-btn'>" +
 					           "      <button type='button' class='btn {{btnClass}}' ng-if='style==\"sequential\"' ng-click='increment()' ng-disabled='activeIndex==largestPossibleIndex'>" +
 					           "        <span class='glyphicon glyphicon-plus'></span>" +
 					           "      </button>" +
-					           "      <button type='button' class='btn {{btnClass}}' ng-if='style==\"dropdown\"' ng-class='{active:isOpen}' fm-timepicker-toggle>" +
+					           "      <button type='button' class='btn {{btnClass}}' ng-if='style==\"dropdown\"' ng-class='{active:isOpen}' fm-timepicker-toggle ng-disabled='{{fmDisabled()}}'>" +
 					           "        <span class='glyphicon glyphicon-time'></span>" +
 					           "      </button>" +
 					           "    </span>" +
@@ -290,7 +290,8 @@
 						isOpen        : "=?",
 						style         : "=?",
 						strict        : "=?",
-						btnClass      : "=?"
+						btnClass      : "=?",
+						fmDisabled    : "&"
 					},
 					controller : "fmTimepickerController",
 					require    : "ngModel",
