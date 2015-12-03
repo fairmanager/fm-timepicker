@@ -19,15 +19,15 @@
 						<fm-timepicker id="time"
 						               name="time"
 						               ng-model="time"
-						               style="style"
-						               start-time="start"
-						               end-time="end"
-						               interval="interval"
-						               large-interval="largeInterval"
-						               format="timeFormat"
-						               is-open="isOpen"
-						               disabled="disabled"
-						               strict="strict"></fm-timepicker>
+						               fm-style="style"
+						               fm-start-time="start"
+						               fm-end-time="end"
+						               fm-interval="interval"
+						               fm-large-interval="largeInterval"
+						               fm-format="timeFormat"
+						               fm-is-open="isOpen"
+						               fm-disabled="disabled"
+						               fm-strict="strict"></fm-timepicker>
 						<p class="text-danger ng-cloak" ng-show="form.time.$error.time">The selected time is not a valid time
 							understood by fm-timepicker.</p>
 
@@ -178,9 +178,9 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="hamster.js"></script>
-<script src="fm-timepicker.js"></script>
+<script src="fm-timepicker.tpls.js"></script>
 <script>
-	angular.module( "demo", [ "fm.components" ] ).
+	angular.module( "demo", [ "fmTimepicker" ] ).
 
 		controller( "DemoController", function( $scope ) {
 			// Our main parameters for the time picker.
