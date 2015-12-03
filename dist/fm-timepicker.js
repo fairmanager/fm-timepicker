@@ -251,16 +251,16 @@
 					template   : "<div>" +
 					           "  <div class='input-group'>" +
 					           "    <span class='input-group-btn' ng-if='style==\"sequential\"'>" +
-					           "      <button type='button' class='btn {{btnClass}}' ng-click='decrement()' ng-disabled='activeIndex==0'>" +
+					           "      <button type='button' class='btn {{btnClass}}' ng-click='decrement()' ng-disabled='activeIndex == 0 || disabled'>" +
 					           "        <span class='glyphicon glyphicon-minus'></span>" +
 					           "      </button>" +
 					           "    </span>" +
-					           "    <input type='text' class='form-control' ng-model='time' ng-keyup='handleKeyboardInput($event)' ng-change='update()'>" +
+					           "    <input type='text' class='form-control' ng-model='time' ng-keyup='handleKeyboardInput($event)' ng-change='update()' ng-disabled='disabled'>" +
 					           "    <span class='input-group-btn'>" +
-					           "      <button type='button' class='btn {{btnClass}}' ng-if='style==\"sequential\"' ng-click='increment()' ng-disabled='activeIndex==largestPossibleIndex'>" +
+					           "      <button type='button' class='btn {{btnClass}}' ng-if='style==\"sequential\"' ng-click='increment()' ng-disabled='activeIndex == largestPossibleIndex || disabled'>" +
 					           "        <span class='glyphicon glyphicon-plus'></span>" +
 					           "      </button>" +
-					           "      <button type='button' class='btn {{btnClass}}' ng-if='style==\"dropdown\"' ng-class='{active:isOpen}' fm-timepicker-toggle>" +
+					           "      <button type='button' class='btn {{btnClass}}' ng-if='style==\"dropdown\"' ng-class='{active:isOpen}' fm-timepicker-toggle ng-disabled='disabled'>" +
 					           "        <span class='glyphicon glyphicon-time'></span>" +
 					           "      </button>" +
 					           "    </span>" +
@@ -278,7 +278,7 @@
 					           "  </div>" +
 					           "</div>",
 					replace  : true,
-					restrict : "E",
+					restrict : "EA",
 					scope    : {
 						ngModel       : "=",
 						format        : "=?",
@@ -290,7 +290,8 @@
 						isOpen        : "=?",
 						style         : "=?",
 						strict        : "=?",
-						btnClass      : "=?"
+						btnClass      : "=?",
+						disabled      : "=?"
 					},
 					controller : "fmTimepickerController",
 					require    : "ngModel",
@@ -549,7 +550,7 @@
 						scope.select = function( timestamp, elementIndex ) {
 							// Construct a moment instance from the UNIX offset.
 							var time;
-							if( moment.tz ) {
+							if( moment.tz && scope.reference.tz() ) {
 								time = moment( timestamp ).tz( scope.reference.tz() );
 							} else {
 								time = moment( timestamp );
