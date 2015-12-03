@@ -34,11 +34,14 @@ module.exports = function( grunt ) {
 				}
 			},
 
-			copy : {
-				js      : {
+			ngAnnotate : {
+				js : {
 					src  : "src/<%= pkg.name %>.js",
 					dest : "dist/<%= pkg.name %>.js"
-				},
+				}
+			},
+
+			copy : {
 				hamster : {
 					src  : "bower_components/hamsterjs/hamster.js",
 					dest : "dist/hamster.js"
@@ -84,6 +87,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-contrib-watch" );
 	grunt.loadNpmTasks( "grunt-gh-pages" );
 	grunt.loadNpmTasks( "grunt-html2js" );
+	grunt.loadNpmTasks( "grunt-ng-annotate" );
 
-	grunt.registerTask( "default", [ "jshint", "html2js", "copy", "concat", "uglify" ] );
+	grunt.registerTask( "default", [ "jshint", "html2js", "ngAnnotate", "copy", "concat", "uglify" ] );
 };
