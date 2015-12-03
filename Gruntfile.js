@@ -29,7 +29,7 @@ module.exports = function( grunt ) {
 					},
 					files   : [ {
 						src  : "src/fmTimepicker.html",
-						dest : "dist/<%= pkg.name %>.js"
+						dest : "dist/<%= pkg.name %>.html.js"
 					} ]
 				}
 			},
