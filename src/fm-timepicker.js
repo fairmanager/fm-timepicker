@@ -41,7 +41,7 @@
 		.directive( "fmTimepicker", fmTimepicker );
 
 	function fmTimeFormat() {
-		return function( input, format ) {
+		return function fmTimeFormatFilter( input, format ) {
 			if( typeof input === "number" ) {
 				input = moment( input );
 			}
@@ -50,7 +50,7 @@
 	}
 
 	function fmTimeInterval() {
-		return function( input, start, end, interval ) {
+		return function fmTimeIntervalFilter( input, start, end, interval ) {
 			if( !start || !end ) {
 				return input;
 			}
@@ -194,7 +194,7 @@
 		$scope.findActiveIndex( $scope.ngModel );
 
 		// Check the supplied interval for validity.
-		$scope.$watch( "interval", function( newInterval, oldInterval ) {
+		$scope.$watch( "interval", function intervalWatcher( newInterval, oldInterval ) {
 			if( newInterval.asMilliseconds() < 1 ) {
 				console.error(
 					"[fm-timepicker] Error: Supplied interval length is smaller than 1ms! Reverting to default." );
@@ -202,7 +202,7 @@
 			}
 		} );
 		// Check the supplied large interval for validity.
-		$scope.$watch( "largeInterval", function( newInterval, oldInterval ) {
+		$scope.$watch( "largeInterval", function largeIntervalWatcher( newInterval, oldInterval ) {
 			if( newInterval.asMilliseconds() < 10 ) {
 				console.error(
 					"[fm-timepicker] Error: Supplied large interval length is smaller than 10ms! Reverting to default." );
@@ -210,7 +210,7 @@
 			}
 		} );
 		// Watch the given interval values.
-		$scope.$watchCollection( "[interval,largeInterval]", function( newValues ) {
+		$scope.$watchCollection( "[interval,largeInterval]", function intervalsWatcher( newValues ) {
 			// Pick array apart.
 			var newInterval      = newValues[ 0 ];
 			var newLargeInterval = newValues[ 1 ];
@@ -234,7 +234,7 @@
 			restrict : "A",
 			link     : function postLink( scope, element, attributes ) {
 				// Toggle the popup when the toggle button is clicked.
-				element.bind( "click", function() {
+				element.bind( "click", function onClick() {
 					if( scope.isOpen ) {
 						scope.focusInputElement();
 						scope.closePopup();
@@ -271,13 +271,13 @@
 			require     : "ngModel",
 			link        : function postLink( scope, element, attributes, controller ) {
 				// Watch our input parameters and re-validate our view when they change.
-				scope.$watchCollection( "[startTime,endTime,interval,strict]", function() {
+				scope.$watchCollection( "[startTime,endTime,interval,strict]", function inputWatcher() {
 					scope.constrainToReference();
 					validateView();
 				} );
 
 				// Watch all time related parameters.
-				scope.$watchCollection( "[startTime,endTime,interval,ngModel]", function() {
+				scope.$watchCollection( "[startTime,endTime,interval,ngModel]", function timeWatcher() {
 					// When they change, find the index of the element in the dropdown that relates to the current model value.
 					scope.findActiveIndex( scope.ngModel );
 				} );
@@ -449,7 +449,7 @@
 				}
 
 				function ensureUpdatedView() {
-					$timeout( function() {
+					$timeout( function runDigest() {
 						scope.$apply();
 					} );
 
@@ -499,7 +499,7 @@
 						// Delay closing the popup by 200ms to ensure selection of
 						// list items can happen before the popup is hidden.
 						$timeout(
-							function() {
+							function closeDropdown() {
 								scope.isOpen = false;
 							}, 200 );
 					} else {
@@ -521,7 +521,7 @@
 				 * @param {Number} timestamp UNIX timestamp
 				 * @param {Number} elementIndex The index of the time element in the dropdown list.
 				 */
-				scope.select = function( timestamp, elementIndex ) {
+				scope.select = function select( timestamp, elementIndex ) {
 					// Construct a moment instance from the UNIX offset.
 					var time;
 					if( moment.tz && scope.reference.tz() ) {
@@ -539,7 +539,7 @@
 					scope.closePopup();
 				};
 
-				scope.increment = function() {
+				scope.increment = function increment() {
 					if( scope.isOpen ) {
 						scope.modelPreview.add( scope.interval );
 						scope.modelPreview = scope.ensureTimeIsWithinBounds( scope.modelPreview );
@@ -551,7 +551,7 @@
 					scope.activeIndex = Math.min( scope.largestPossibleIndex, scope.activeIndex + 1 );
 				};
 
-				scope.decrement = function() {
+				scope.decrement = function decrement() {
 					if( scope.isOpen ) {
 						scope.modelPreview.subtract( scope.interval );
 						scope.modelPreview = scope.ensureTimeIsWithinBounds( scope.modelPreview );
@@ -566,7 +566,7 @@
 				/**
 				 * Check if the value in the input control is a valid timestamp.
 				 */
-				scope.update = function() {
+				scope.update = function update() {
 					var timeValid = checkTimeValueValid( scope.time ) && checkTimeValueWithinBounds( scope.time );
 					if( timeValid ) {
 						var newTime;
@@ -582,7 +582,7 @@
 					}
 				};
 
-				scope.handleKeyboardInput = function( event ) {
+				scope.handleKeyboardInput = function handleKeyboardInput( event ) {
 					switch( event.keyCode ) {
 						case 13:
 							// Enter
@@ -630,7 +630,7 @@
 				 * Prevent default behavior from happening.
 				 * @param event
 				 */
-				scope.preventDefault = function( event ) {
+				scope.preventDefault = function preventDefault( event ) {
 					event.preventDefault();
 				};
 
@@ -639,11 +639,11 @@
 				 * We use this to constrain the possible values for the index that marks a list item as active.
 				 * @param {Number} index
 				 */
-				scope.largestPossibleIndexIs = function( index ) {
+				scope.largestPossibleIndexIs = function largestPossibleIndexIs( index ) {
 					scope.largestPossibleIndex = index;
 				};
 
-				scope.focusInputElement = function() {
+				scope.focusInputElement = function focusInputElement() {
 					$( inputElement ).focus();
 				};
 
@@ -653,7 +653,7 @@
 				/**
 				 * Open the popup when the input box gets focus.
 				 */
-				inputElement.bind( "focus", function() {
+				inputElement.bind( "focus", function onFocus() {
 					// Without delay the popup can glitch close itself instantly after being opened.
 					$timeout( openPopup, 150 );
 					scope.isFocused = true;
@@ -662,9 +662,9 @@
 				/**
 				 * Invoked when the input box loses focus.
 				 */
-				inputElement.bind( "blur", function() {
+				inputElement.bind( "blur", function onBlur() {
 					// Delay any action by 150ms
-					$timeout( function() {
+					$timeout( function checkFocusState() {
 						// Check if we didn't get refocused in the meantime.
 						// This can happen if the input box is selected and the user toggles the dropdown.
 						// This would cause a hide and close in rapid succession, so don't do it.
@@ -676,12 +676,12 @@
 					scope.isFocused = false;
 				} );
 
-				popupListElement.bind( "mousedown", function( event ) {
+				popupListElement.bind( "mousedown", function onMousedown( event ) {
 					event.preventDefault();
 				} );
 
 				if( typeof Hamster === "function" ) {
-					Hamster( inputElement[ 0 ] ).wheel( function( event, delta, deltaX, deltaY ) {
+					Hamster( inputElement[ 0 ] ).wheel( function onMousewheel( event, delta, deltaX, deltaY ) {
 						if( scope.isFocused ) {
 							event.preventDefault();
 
