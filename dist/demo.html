@@ -26,6 +26,7 @@
 						               large-interval="largeInterval"
 						               format="timeFormat"
 						               is-open="isOpen"
+						               disabled="disabled"
 						               strict="strict"></fm-timepicker>
 						<p class="text-danger ng-cloak" ng-show="form.time.$error.time">The selected time is not a valid time
 							understood by fm-timepicker.</p>
@@ -141,6 +142,18 @@
 							far
 							we will skip through the list when using the PageUp/PageDown keys. This has no effect on the
 							available options.</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Disabled?</label>
+
+					<div class="col-sm-10">
+						<div class="checkbox">
+							<label class="control-label" for="disabled">
+								<input type="checkbox" id="disabled" ng-model="disabled"> {{disabled?'Yes':'No'}}
+							</label>
+						</div>
 					</div>
 				</div>
 
