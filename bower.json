@@ -5,7 +5,7 @@
   "authors": [
     "Oliver Salzburg <oliver.salzburg@gmail.com>"
   ],
-  "main": "dist/fm-timepicker.js",
+  "main": "dist/fm-timepicker.tpls.js",
   "license": "MIT",
   "private": false,
   "dependencies": {

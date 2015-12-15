@@ -286,7 +286,7 @@
 				/**
 				 * Invoked when we need to update the view due to a changed model value.
 				 */
-				controller.$render = function() {
+				controller.$render = function render() {
 					// Convert the moment instance we got to a string in our desired format.
 					var time = moment( controller.$modelValue ).format( scope.fmFormat );
 					// Check if the given time is valid.
