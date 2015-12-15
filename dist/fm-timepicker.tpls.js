@@ -84,7 +84,12 @@
 		$scope.fmInterval      = $scope.fmInterval || moment.duration( 30, "minutes" );
 		$scope.fmLargeInterval = $scope.fmLargeInterval || moment.duration( 60, "minutes" );
 		$scope.fmStrict        = $scope.fmStrict || false;
-		$scope.fmBtnClass      = $scope.fmBtnClass || "btn-default";
+		$scope.fmBtnClass      = $scope.fmBtnClass || "btn btn-default";
+		$scope.fmIconClasses   = $scope.fmIconClasses || {
+				plus  : "glyphicon glyphicon-plus",
+				minus : "glyphicon glyphicon-minus",
+				time  : "glyphicon glyphicon-time"
+			};
 
 		if( moment.tz ) {
 			$scope.fmStartTime.tz( $scope.fmReference.tz() );
@@ -287,7 +292,7 @@
 				/**
 				 * Invoked when we need to update the view due to a changed model value.
 				 */
-				controller.$render = function() {
+				controller.$render = function render() {
 					// Convert the moment instance we got to a string in our desired format.
 					var time = moment( controller.$modelValue ).format( scope.fmFormat );
 					// Check if the given time is valid.
@@ -706,5 +711,5 @@
 
 angular.module('fmTimepicker').run(['$templateCache', function($templateCache) {
   $templateCache.put("fmTimepicker.html",
-    "<div><div class=\"input-group\"><span class=\"input-group-btn\" ng-if=\"fmStyle === 'sequential'\"><button type=\"button\" class=\"btn {{fmBtnClass}}\" ng-click=\"decrement()\" ng-disabled=\"activeIndex === 0 || fmDisabled\"><span class=\"glyphicon glyphicon-minus\"></span></button></span> <input type=\"text\" class=\"form-control\" ng-model=\"time\" ng-keyup=\"handleKeyboardInput( $event )\" ng-change=\"update()\" ng-disabled=\"fmDisabled\"> <span class=\"input-group-btn\"><button type=\"button\" class=\"btn {{fmBtnClass}}\" ng-if=\"fmStyle === 'sequential'\" ng-click=\"increment()\" ng-disabled=\"activeIndex === largestPossibleIndex || fmDisabled\"><span class=\"glyphicon glyphicon-plus\"></span></button> <button type=\"button\" class=\"btn {{fmBtnClass}}\" ng-if=\"fmStyle === 'dropdown'\" ng-class=\"{active : fmIsOpen}\" fm-timepicker-toggle ng-disabled=\"fmDisabled\"><span class=\"glyphicon glyphicon-time\"></span></button></span></div><div class=\"dropdown\" ng-if=\"fmStyle === 'dropdown' && fmIsOpen\" ng-class=\"{open : fmIsOpen}\"><ul class=\"dropdown-menu form-control\" style=\"height:auto; max-height:160px; overflow-y:scroll\" ng-mousedown=\"handleListClick( $event )\"><!-- Fill an empty array with time values between start and end time with the given interval, then iterate over that array. --><li ng-repeat=\"time in ( $parent.dropDownOptions = ( [] | fmTimeInterval:fmStartTime:fmEndTime:fmInterval ) )\" ng-click=\"select( time, $index )\" ng-class=\"{active : activeIndex === $index}\"><!-- For each item, check if it is the last item. If it is, communicate the index to a method in the scope. -->{{$last ? largestPossibleIndexIs( $index ) : angular.noop()}}<!-- Render a link into the list item, with the formatted time value. --><a href=\"#\" ng-click=\"preventDefault( $event )\">{{time | fmTimeFormat:fmFormat}}</a></li></ul></div></div>");
+    "<div><div class=\"input-group\"><span class=\"input-group-btn\" ng-if=\"fmStyle === 'sequential'\"><button type=\"button\" class=\"{{fmBtnClass}}\" ng-click=\"decrement()\" ng-disabled=\"activeIndex === 0 || fmDisabled\"><span class=\"{{fmIconClasses.minus}}\"></span></button></span> <input type=\"text\" class=\"form-control\" ng-model=\"time\" ng-keyup=\"handleKeyboardInput( $event )\" ng-change=\"update()\" ng-disabled=\"fmDisabled\"> <span class=\"input-group-btn\"><button type=\"button\" class=\"{{fmBtnClass}}\" ng-if=\"fmStyle === 'sequential'\" ng-click=\"increment()\" ng-disabled=\"activeIndex === largestPossibleIndex || fmDisabled\"><span class=\"{{fmIconClasses.plus}}\"></span></button> <button type=\"button\" class=\"{{fmBtnClass}}\" ng-if=\"fmStyle === 'dropdown'\" ng-class=\"{active : fmIsOpen}\" fm-timepicker-toggle ng-disabled=\"fmDisabled\"><span class=\"{{fmIconClasses.time}}\"></span></button></span></div><div class=\"dropdown\" ng-if=\"fmStyle === 'dropdown' && fmIsOpen\" ng-class=\"{open : fmIsOpen}\"><ul class=\"dropdown-menu form-control\" style=\"height:auto; max-height:160px; overflow-y:scroll\" ng-mousedown=\"handleListClick( $event )\"><!-- Fill an empty array with time values between start and end time with the given interval, then iterate over that array. --><li ng-repeat=\"time in ( $parent.dropDownOptions = ( [] | fmTimeInterval:fmStartTime:fmEndTime:fmInterval ) )\" ng-click=\"select( time, $index )\" ng-class=\"{active : activeIndex === $index}\"><!-- For each item, check if it is the last item. If it is, communicate the index to a method in the scope. -->{{$last ? largestPossibleIndexIs( $index ) : angular.noop()}}<!-- Render a link into the list item, with the formatted time value. --><a href=\"#\" ng-click=\"preventDefault( $event )\">{{time | fmTimeFormat:fmFormat}}</a></li></ul></div></div>");
 }]);
