@@ -271,6 +271,7 @@
 				fmStyle         : "=?",
 				fmStrict        : "=?",
 				fmBtnClass      : "=?",
+				fmIconClasses   : "=?",
 				fmDisabled      : "=?"
 			},
 			controller  : "fmTimepickerController",
