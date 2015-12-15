@@ -1,6 +1,6 @@
 {
   "name": "fm-timepicker",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "FairManager Time Picker Component",
   "main": "src/fm-timepicker.js",
   "devDependencies": {

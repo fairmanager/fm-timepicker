@@ -1,5 +1,5 @@
 /*
- * Hamster.js v1.0.4
+ * Hamster.js v1.1.0
  * (c) 2013 Monospaced http://monospaced.com
  * License: MIT
  */
@@ -201,7 +201,7 @@ Hamster.normalise = {
    * @returns {Object}      event
    */
    event: function normaliseEvent(originalEvent){
-    var event = Hamster.SUPPORT === 'wheel' ? originalEvent : {
+    var event = {
           // keep a reference to the original event object
           originalEvent: originalEvent,
           target: originalEvent.target || originalEvent.srcElement,
@@ -306,14 +306,17 @@ Hamster.normalise = {
   }
 };
 
-// Expose Hamster to the global object
-window.Hamster = Hamster;
-
-// requireJS module definition
 if (typeof window.define === 'function' && window.define.amd) {
+  // AMD
   window.define('hamster', [], function(){
     return Hamster;
   });
+} else if (typeof exports === 'object') {
+  // CommonJS
+  module.exports = Hamster;
+} else {
+  // Browser global
+  window.Hamster = Hamster;
 }
 
 })(window, window.document);
