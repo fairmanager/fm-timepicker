@@ -84,7 +84,12 @@
 		$scope.fmInterval      = $scope.fmInterval || moment.duration( 30, "minutes" );
 		$scope.fmLargeInterval = $scope.fmLargeInterval || moment.duration( 60, "minutes" );
 		$scope.fmStrict        = $scope.fmStrict || false;
-		$scope.fmBtnClass      = $scope.fmBtnClass || "btn-default";
+		$scope.fmBtnClass      = $scope.fmBtnClass || "btn btn-default";
+		$scope.fmIconClasses   = $scope.fmIconClasses || {
+				plus  : "glyphicon glyphicon-plus",
+				minus : "glyphicon glyphicon-minus",
+				time  : "glyphicon glyphicon-time"
+			};
 
 		if( moment.tz ) {
 			$scope.fmStartTime.tz( $scope.fmReference.tz() );
