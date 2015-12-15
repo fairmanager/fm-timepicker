@@ -84,7 +84,12 @@
 		$scope.fmInterval      = $scope.fmInterval || moment.duration( 30, "minutes" );
 		$scope.fmLargeInterval = $scope.fmLargeInterval || moment.duration( 60, "minutes" );
 		$scope.fmStrict        = $scope.fmStrict || false;
-		$scope.fmBtnClass      = $scope.fmBtnClass || "btn-default";
+		$scope.fmBtnClass      = $scope.fmBtnClass || "btn btn-default";
+		$scope.fmIconClasses   = $scope.fmIconClasses || {
+				plus  : "glyphicon glyphicon-plus",
+				minus : "glyphicon glyphicon-minus",
+				time  : "glyphicon glyphicon-time"
+			};
 
 		if( moment.tz ) {
 			$scope.fmStartTime.tz( $scope.fmReference.tz() );
@@ -267,6 +272,7 @@
 				fmStyle         : "=?",
 				fmStrict        : "=?",
 				fmBtnClass      : "=?",
+				fmIconClasses   : "=?",
 				fmDisabled      : "=?"
 			},
 			controller  : "fmTimepickerController",
@@ -287,7 +293,7 @@
 				/**
 				 * Invoked when we need to update the view due to a changed model value.
 				 */
-				controller.$render = function() {
+				controller.$render = function render() {
 					// Convert the moment instance we got to a string in our desired format.
 					var time = moment( controller.$modelValue ).format( scope.fmFormat );
 					// Check if the given time is valid.
