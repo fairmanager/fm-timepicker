@@ -374,6 +374,10 @@
 				 * @returns {boolean} true if the string is a valid time; false otherwise.
 				 */
 				function checkTimeValueValid( timeString ) {
+					if( !timeString ) {
+						return false;
+					}
+
 					var time;
 					if( moment.tz ) {
 						time = timeString ? moment.tz(
