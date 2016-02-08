@@ -31,6 +31,8 @@
 
 	/* globals $, angular, Hamster, moment */
 
+	fmTimepickerController.$inject = ["$scope"];
+	fmTimepicker.$inject = ["$timeout"];
 	angular.module( "fmTimepicker", [] );
 
 	angular.module( "fmTimepicker" )
@@ -193,7 +195,7 @@
 			}
 		};
 		// The index of the last element in our time value collection.
-		$scope.largestPossibleIndex = Number.MAX_VALUE;
+		$scope.largestPossibleIndex   = Number.MAX_VALUE;
 		// The amount of list items we should skip when we perform a large jump through the collection.
 		$scope.largeIntervalIndexJump = Number.MAX_VALUE;
 		// Seed the active index based on the current model value.
@@ -218,8 +220,8 @@
 		// Watch the given interval values.
 		$scope.$watchCollection( "[fmInterval,fmLargeInterval]", function intervalsWatcher( newValues ) {
 			// Pick array apart.
-			var newInterval      = newValues[ 0 ];
-			var newLargeInterval = newValues[ 1 ];
+			var newInterval                  = newValues[ 0 ];
+			var newLargeInterval             = newValues[ 1 ];
 			// Get millisecond values for the intervals.
 			var newIntervalMilliseconds      = newInterval.asMilliseconds();
 			var newLargeIntervalMilliseconds = newLargeInterval.asMilliseconds();
@@ -234,7 +236,6 @@
 			$scope.largeIntervalIndexJump = newLargeIntervalMilliseconds / newIntervalMilliseconds;
 		} );
 	}
-	fmTimepickerController.$inject = ["$scope"];
 
 	function fmTimepickerToggle() {
 		return {
@@ -295,7 +296,7 @@
 				 */
 				controller.$render = function render() {
 					// Convert the moment instance we got to a string in our desired format.
-					var time = moment( controller.$modelValue ).format( scope.fmFormat );
+					var time      = moment( controller.$modelValue ).format( scope.fmFormat );
 					// Check if the given time is valid.
 					var timeValid = checkTimeValueValid( time );
 					if( scope.fmStrict ) {
@@ -321,6 +322,7 @@
 					controller.$setValidity( "interval", to );
 					controller.$setValidity( "start", to );
 					controller.$setValidity( "end", to );
+					controller.$setValidity( "required", to );
 				}
 
 				/**
@@ -329,6 +331,14 @@
 				 */
 				function validateView() {
 					resetValidity( true );
+
+					if( !scope.time ) {
+						if( attributes.required ) {
+							controller.$setValidity( "required", false );
+						}
+						controller.$setViewValue( null );
+					}
+
 					// Check if the string in the input box represents a valid date according to the rules set through parameters in our scope.
 					var timeValid = checkTimeValueValid( scope.time );
 					if( scope.fmStrict ) {
@@ -375,6 +385,10 @@
 				 * @returns {boolean} true if the string is a valid time; false otherwise.
 				 */
 				function checkTimeValueValid( timeString ) {
+					if( !timeString ) {
+						return false;
+					}
+
 					var time;
 					if( moment.tz ) {
 						time = timeString ? moment.tz(
@@ -441,9 +455,9 @@
 						// Calculate the amount of milliseconds that passed since the specified start time.
 						var durationSinceStartTime = time.diff( scope.fmStartTime );
 						// Calculate how many milliseconds are within the given time interval.
-						var intervalMilliseconds = scope.fmInterval.asMilliseconds();
+						var intervalMilliseconds   = scope.fmInterval.asMilliseconds();
 						// Check if the modulo operation has a remainder.
-						isValid = ( 0 === ( durationSinceStartTime % intervalMilliseconds ) );
+						isValid                    = ( 0 === ( durationSinceStartTime % intervalMilliseconds ) );
 					}
 
 					if( !isValid ) {
@@ -480,8 +494,8 @@
 					// Find the selected list item.
 					var selectedListElement = $( "li.active", popupListElement );
 					// Retrieve offset from the top and height of the list element.
-					var top    = selectedListElement.length ? selectedListElement.position().top : 0;
-					var height = selectedListElement.length ? selectedListElement.outerHeight( true ) : 0;
+					var top                 = selectedListElement.length ? selectedListElement.position().top : 0;
+					var height              = selectedListElement.length ? selectedListElement.outerHeight( true ) : 0;
 					// Scroll the list to bring the selected list element into the view.
 					$( popupListElement ).scrollTop( top - height );
 				}
@@ -706,6 +720,5 @@
 			}
 		};
 	}
-	fmTimepicker.$inject = ["$timeout"];
 
 })();

@@ -27,7 +27,8 @@
 									   fm-format="timeFormat"
 									   fm-is-open="isOpen"
 									   fm-disabled="disabled"
-									   fm-strict="strict"></fm-timepicker>
+									   fm-strict="strict"
+									   ng-required="required"></fm-timepicker>
 						<p class="text-danger ng-cloak" ng-show="form.time.$error.time">The selected time is not a valid
 							time understood by fm-timepicker.</p>
 
@@ -37,11 +38,14 @@
 						<p class="text-danger ng-cloak" ng-show="form.time.$error.interval">The selected time does not
 							lie on a time value that would fit the given time interval.</p>
 
-						<p class="text-danger ng-cloak" ng-show="form.date.$error.start">The given start time is
+						<p class="text-danger ng-cloak" ng-show="form.time.$error.start">The given start time is
 							invalid.</p>
 
-						<p class="text-danger ng-cloak" ng-show="form.date.$error.end">The given end time is
+						<p class="text-danger ng-cloak" ng-show="form.time.$error.end">The given end time is
 							invalid.</p>
+
+						<p class="text-danger ng-cloak" ng-show="form.time.$error.required">You need to supply a
+							value.</p>
 					</div>
 				</div>
 
@@ -73,6 +77,9 @@
 								<input type="checkbox" id="strict" ng-model="strict"> {{strict?'Yes':'No'}}
 							</label>
 						</div>
+
+						<p class="help-block">In Strict Mode, fm-timepicker will not validate if the set time is not
+							within the start and end time frame.</p>
 					</div>
 				</div>
 
@@ -158,6 +165,18 @@
 					</div>
 				</div>
 
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Required?</label>
+
+					<div class="col-sm-10">
+						<div class="checkbox">
+							<label class="control-label" for="required">
+								<input type="checkbox" id="required" ng-model="required"> {{required?'Yes':'No'}}
+							</label>
+						</div>
+					</div>
+				</div>
+
 				<div class="form-group" ng-show="style=='dropdown'">
 					<label class="col-sm-2 control-label">Dropdown open?</label>
 
@@ -181,9 +200,11 @@
 <script src="hamster.js"></script>
 <script src="fm-timepicker.tpls.js"></script>
 <script>
-	angular.module( "demo", [ "fmTimepicker" ] ).
+	angular
+			.module( "demo", [ "fmTimepicker" ] )
+			.controller( "DemoController", DemoController );
 
-	controller( "DemoController", function( $scope ) {
+	function DemoController( $scope ) {
 		// Our main parameters for the time picker.
 		// These will primarily be used to populate the scope of this demonstration.
 		$scope.style                = "dropdown";
@@ -211,7 +232,7 @@
 		$scope.$watch( "largeIntervalMinutes", function( newInterval ) {
 			$scope.largeInterval = moment.duration( parseInt( newInterval ), "minutes" );
 		} );
-	} );
+	}
 </script>
 </body>
 </html>
