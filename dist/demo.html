@@ -184,9 +184,11 @@
 <script src="hamster.js"></script>
 <script src="fm-timepicker.tpls.js"></script>
 <script>
-	angular.module( "demo", [ "fmTimepicker" ] ).
+	angular
+			.module( "demo", [ "fmTimepicker" ] )
+			.controller( "DemoController", DemoController );
 
-	controller( "DemoController", function( $scope ) {
+	function DemoController( $scope ) {
 		// Our main parameters for the time picker.
 		// These will primarily be used to populate the scope of this demonstration.
 		$scope.style                = "dropdown";
@@ -214,7 +216,7 @@
 		$scope.$watch( "largeIntervalMinutes", function( newInterval ) {
 			$scope.largeInterval = moment.duration( parseInt( newInterval ), "minutes" );
 		} );
-	} );
+	}
 </script>
 </body>
 </html>
