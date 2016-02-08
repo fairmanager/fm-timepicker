@@ -320,6 +320,7 @@
 					controller.$setValidity( "interval", to );
 					controller.$setValidity( "start", to );
 					controller.$setValidity( "end", to );
+					controller.$setValidity( "required", to );
 				}
 
 				/**
@@ -328,6 +329,14 @@
 				 */
 				function validateView() {
 					resetValidity( true );
+
+					if( !scope.time ) {
+						if( attributes.required ) {
+							controller.$setValidity( "required", false );
+						}
+						controller.$setViewValue( null );
+					}
+
 					// Check if the string in the input box represents a valid date according to the rules set through parameters in our scope.
 					var timeValid = checkTimeValueValid( scope.time );
 					if( scope.fmStrict ) {

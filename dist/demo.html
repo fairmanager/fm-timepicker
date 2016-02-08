@@ -27,7 +27,8 @@
 									   fm-format="timeFormat"
 									   fm-is-open="isOpen"
 									   fm-disabled="disabled"
-									   fm-strict="strict"></fm-timepicker>
+									   fm-strict="strict"
+									   ng-required="required"></fm-timepicker>
 						<p class="text-danger ng-cloak" ng-show="form.time.$error.time">The selected time is not a valid
 							time understood by fm-timepicker.</p>
 
@@ -42,6 +43,9 @@
 
 						<p class="text-danger ng-cloak" ng-show="form.time.$error.end">The given end time is
 							invalid.</p>
+
+						<p class="text-danger ng-cloak" ng-show="form.time.$error.required">You need to supply a
+							value.</p>
 					</div>
 				</div>
 
@@ -156,6 +160,18 @@
 						<div class="checkbox">
 							<label class="control-label" for="disabled">
 								<input type="checkbox" id="disabled" ng-model="disabled"> {{disabled?'Yes':'No'}}
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-2 control-label">Required?</label>
+
+					<div class="col-sm-10">
+						<div class="checkbox">
+							<label class="control-label" for="required">
+								<input type="checkbox" id="required" ng-model="required"> {{required?'Yes':'No'}}
 							</label>
 						</div>
 					</div>
