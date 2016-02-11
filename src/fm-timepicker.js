@@ -305,8 +305,6 @@
 					if( timeValid ) {
 						// If the time is valid, store the time string in the scope used by the input box.
 						scope.time = time;
-					} else {
-						throw new Error( "The provided time value is invalid." );
 					}
 				};
 
