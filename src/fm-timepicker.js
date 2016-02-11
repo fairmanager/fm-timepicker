@@ -179,6 +179,7 @@
 				if( time.isSame( model ) ) {
 					break;
 				}
+
 				// Check if we've already passed the time value that would fit our current model.
 				if( time.isAfter( model ) ) {
 					// If we're in strict mode, set an invalid index.
@@ -244,6 +245,7 @@
 					if( scope.fmIsOpen ) {
 						scope.focusInputElement();
 						scope.closePopup();
+
 					} else {
 						// Focusing the input element will automatically open the popup
 						scope.focusInputElement();
@@ -398,6 +400,7 @@
 						controller.$setValidity( "time", false );
 						controller.$setViewValue( null );
 						return false;
+
 					} else {
 						controller.$setValidity( "time", true );
 						return true;
@@ -416,14 +419,17 @@
 							timeString,
 							scope.fmFormat,
 							scope.fmReference.tz() ) : moment.invalid();
+
 					} else {
 						time = timeString ? moment( timeString, scope.fmFormat ) : moment.invalid();
 					}
+
 					time = scope.constrainToReference( time );
 					if( !time.isValid() || time.isBefore( scope.fmStartTime ) || time.isAfter( scope.fmEndTime ) ) {
 						controller.$setValidity( "bounds", false );
 						controller.$setViewValue( null );
 						return false;
+
 					} else {
 						controller.$setValidity( "bounds", true );
 						return true;
@@ -442,6 +448,7 @@
 							timeString,
 							scope.fmFormat,
 							scope.fmReference.tz() ) : moment.invalid();
+
 					} else {
 						time = timeString ? moment( timeString, scope.fmFormat ) : moment.invalid();
 					}
@@ -460,6 +467,7 @@
 						controller.$setValidity( "interval", false );
 						controller.$setViewValue( null );
 						return false;
+
 					} else {
 						controller.$setValidity( "interval", true );
 						return true;
@@ -520,6 +528,7 @@
 							function closeDropdown() {
 								scope.fmIsOpen = false;
 							}, 200 );
+
 					} else {
 						scope.fmIsOpen = false;
 						$timeout( ensureUpdatedView );
@@ -561,6 +570,7 @@
 					if( scope.fmIsOpen ) {
 						scope.modelPreview.add( scope.fmInterval );
 						scope.modelPreview = scope.ensureTimeIsWithinBounds( scope.modelPreview );
+
 					} else {
 						scope.ngModel.add( scope.fmInterval );
 						scope.ngModel = scope.ensureTimeIsWithinBounds( scope.ngModel );
@@ -573,6 +583,7 @@
 					if( scope.fmIsOpen ) {
 						scope.modelPreview.subtract( scope.fmInterval );
 						scope.modelPreview = scope.ensureTimeIsWithinBounds( scope.modelPreview );
+
 					} else {
 						scope.ngModel.subtract( scope.fmInterval );
 						scope.ngModel = scope.ensureTimeIsWithinBounds( scope.ngModel );
@@ -592,9 +603,11 @@
 							newTime = moment.tz( scope.time,
 								scope.fmFormat,
 								scope.fmReference.tz() );
+
 						} else {
 							newTime = moment( scope.time, scope.fmFormat );
 						}
+
 						newTime = scope.constrainToReference( newTime );
 						controller.$setViewValue( newTime );
 					}
@@ -609,10 +622,12 @@
 								scope.fmIsOpen = false;
 							}
 							break;
+
 						case 27:
 							// Escape
 							scope.closePopup();
 							break;
+
 						case 33:
 							// Page up
 							openPopup();
@@ -621,6 +636,7 @@
 							scope.activeIndex  = Math.max( 0,
 								scope.activeIndex - scope.largeIntervalIndexJump );
 							break;
+
 						case 34:
 							// Page down
 							openPopup();
@@ -629,16 +645,19 @@
 							scope.activeIndex  = Math.min( scope.largestPossibleIndex,
 								scope.activeIndex + scope.largeIntervalIndexJump );
 							break;
+
 						case 38:
 							// Up arrow
 							openPopup();
 							scope.decrement();
 							break;
+
 						case 40:
 							// Down arrow
 							openPopup();
 							scope.increment();
 							break;
+
 						default:
 					}
 					$timeout( ensureUpdatedView );
@@ -712,9 +731,7 @@
 						}
 					} );
 				}
-
 			}
 		};
 	}
-
 })();
