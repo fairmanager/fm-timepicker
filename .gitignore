@@ -2,3 +2,4 @@
 .idea/workspace.xml
 bower_components/
 node_modules/
+npm-debug.log
