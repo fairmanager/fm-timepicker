@@ -296,12 +296,15 @@
 				 */
 				controller.$render = function render() {
 					// Convert the moment instance we got to a string in our desired format.
-					var time      = moment( controller.$modelValue ).format( scope.fmFormat );
+					var time = null;
+					if( controller.$modelValue !== null ) {
+						time = moment( controller.$modelValue ).format( scope.fmFormat );
+					}
+
 					// Check if the given time is valid.
 					var timeValid = checkTimeValueValid( time );
 					if( scope.fmStrict ) {
-						timeValid = timeValid && checkTimeValueWithinBounds( time ) && checkTimeValueFitsInterval(
-								time );
+						timeValid = timeValid && checkTimeValueWithinBounds( time ) && checkTimeValueFitsInterval( time );
 					}
 
 					if( timeValid ) {

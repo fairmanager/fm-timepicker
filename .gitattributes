@@ -1,0 +1,8 @@
+* text eol=lf
+*.cmd text eol=crlf
+
+*.ai binary
+*.exe binary
+*.jpg binary
+*.png binary
+*.psd binary
