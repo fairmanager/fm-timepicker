@@ -215,9 +215,10 @@
 		$scope.largeIntervalMinutes = 60;
 
 		// Parameters that will actually be passed into the timepicker.
-		$scope.time  = moment( "15:01", $scope.timeFormat );
-		$scope.start = moment( $scope.startTime, $scope.timeFormat );
-		$scope.end   = moment( $scope.endTime, $scope.timeFormat );
+		$scope.required = false;
+		$scope.time     = moment( "15:01", $scope.timeFormat );
+		$scope.start    = moment( $scope.startTime, $scope.timeFormat );
+		$scope.end      = moment( $scope.endTime, $scope.timeFormat );
 
 		// Watch parameters in our local scope and update the parameters in the timepicker as needed.
 		$scope.$watchCollection( "[startTime, timeFormat]", function( newValues ) {
