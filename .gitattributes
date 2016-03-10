@@ -4,5 +4,7 @@
 *.ai binary
 *.exe binary
 *.jpg binary
+*.pdf binary
 *.png binary
 *.psd binary
+*.zip binary
