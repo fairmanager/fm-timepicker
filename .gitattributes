@@ -10,6 +10,7 @@
 
 *.ai binary
 *.aiff binary
+*.dll binary
 *.eot binary
 *.exe binary
 *.jar binary
