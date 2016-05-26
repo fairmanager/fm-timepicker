@@ -2,7 +2,7 @@
 <html ng-app="demo">
 <head>
 	<title></title>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 </head>
 <body ng-controller="DemoController">
 <div class="container">
@@ -29,6 +29,7 @@
 									   fm-disabled="disabled"
 									   fm-strict="strict"
 									   ng-required="required"></fm-timepicker>
+									   
 						<p class="text-danger ng-cloak" ng-show="form.time.$error.time">The selected time is not a valid
 							time understood by fm-timepicker.</p>
 
@@ -47,6 +48,22 @@
 						<p class="text-danger ng-cloak" ng-show="form.time.$error.required">You need to supply a
 							value.</p>
 					</div>
+					
+				</div>
+
+				<hr>
+
+				<label class="text-muted">Actions</label>
+				
+				<div class="form-group">
+					
+					<label class="control-label col-sm-2" for="time"></label>
+					
+					<div class="col-sm-10">
+						<button type="button" class="btn btn-default" ng-click="clear()">Clear</button>
+						<button type="button" class="btn btn-default" ng-click="setNow()">Now</button>
+					</div>
+					
 				</div>
 
 				<hr>
@@ -193,10 +210,10 @@
 	</div>
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js"></script>
-<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.js"></script>
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="hamster.js"></script>
 <script src="fm-timepicker.tpls.js"></script>
 <script>
@@ -233,6 +250,18 @@
 		$scope.$watch( "largeIntervalMinutes", function( newInterval ) {
 			$scope.largeInterval = moment.duration( parseInt( newInterval ), "minutes" );
 		} );
+		
+		$scope.clear = function() {
+			
+			$scope.time = null;
+			
+		}
+		
+		$scope.setNow = function() {
+			
+			$scope.time = moment();
+			
+		}
 	}
 </script>
 </body>
