@@ -1,5 +1,5 @@
 {
-  "maxErrors": null,
+	"maxErrors": null,
 	"disallowEmptyBlocks": true,
 	"disallowKeywordsOnNewLine": [
 		"catch",
