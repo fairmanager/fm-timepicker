@@ -307,7 +307,7 @@
 						timeValid = timeValid && checkTimeValueWithinBounds( time ) && checkTimeValueFitsInterval( time );
 					}
 
-					if( timeValid ) {
+					if( timeValid || time === null ) {
 						// If the time is valid, store the time string in the scope used by the input box.
 						scope.time = time;
 					}
@@ -386,6 +386,10 @@
 				 * @returns {boolean} true if the string is a valid time; false otherwise.
 				 */
 				function checkTimeValueValid( timeString ) {
+					if ( timeString === null && attributes.required !== true ) {
+						return true;
+					}
+					
 					if( !timeString ) {
 						return false;
 					}
@@ -470,7 +474,6 @@
 						controller.$setValidity( "interval", false );
 						controller.$setViewValue( null );
 						return false;
-
 					} else {
 						controller.$setValidity( "interval", true );
 						return true;
