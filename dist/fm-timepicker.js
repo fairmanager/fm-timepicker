@@ -31,6 +31,8 @@
 
 	/* globals $, angular, Hamster, moment */
 
+	fmTimepickerController.$inject = ["$scope"];
+	fmTimepicker.$inject = ["$timeout"];
 	angular.module( "fmTimepicker", [] );
 
 	angular.module( "fmTimepicker" )
@@ -235,7 +237,6 @@
 			$scope.largeIntervalIndexJump = newLargeIntervalMilliseconds / newIntervalMilliseconds;
 		} );
 	}
-	fmTimepickerController.$inject = ["$scope"];
 
 	function fmTimepickerToggle() {
 		return {
@@ -387,10 +388,6 @@
 				 * @returns {boolean} true if the string is a valid time; false otherwise.
 				 */
 				function checkTimeValueValid( timeString ) {
-					if ( timeString === null && attributes.required !== true ) {
-						return true;
-					}
-					
 					if( !timeString ) {
 						return false;
 					}
@@ -741,5 +738,4 @@
 			}
 		};
 	}
-	fmTimepicker.$inject = ["$timeout"];
 })();
