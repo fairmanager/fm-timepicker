@@ -386,10 +386,6 @@
 				 * @returns {boolean} true if the string is a valid time; false otherwise.
 				 */
 				function checkTimeValueValid( timeString ) {
-					if ( timeString === null && attributes.required !== true ) {
-						return true;
-					}
-					
 					if( !timeString ) {
 						return false;
 					}
