@@ -1,0 +1,50 @@
+{
+	"before": {
+		"tasks": [
+			{
+				"name": "Build distribution files",
+				"command": "grunt",
+				"comment": "[TASK] Build dist files"
+			}
+		]
+	},
+	"patch": {
+		"tasks": [
+			{
+				"name": "Bump Version",
+				"command": "bump",
+				"args": [
+					"--patch",
+					"--no-commit"
+				],
+				"comment": "[TASK] Bump version"
+			}
+		]
+	},
+	"minor": {
+		"tasks": [
+			{
+				"name": "Bump version",
+				"command": "bump",
+				"args": [
+					"--minor",
+					"--no-commit"
+				],
+				"comment": "[TASK] Bump version"
+			}
+		]
+	},
+	"major": {
+		"tasks": [
+			{
+				"name": "Bump version",
+				"command": "bump",
+				"args": [
+					"--major",
+					"--no-commit"
+				],
+				"comment": "[TASK] Bump version"
+			}
+		]
+	}
+}
