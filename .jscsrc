@@ -113,7 +113,8 @@
 		"all": true
 	},
 	"safeContextKeyword": [
-		"self"
+		"self",
+		"vm"
 	],
 	"validateLineBreaks": "LF",
 	"validateParameterSeparator": ", ",
