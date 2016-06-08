@@ -1,6 +1,6 @@
 {
   "name": "fm-timepicker",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "description": "FairManager Time Picker Component",
   "main": "dist/fm-timepicker.tpls.js",
   "dependencies": {
