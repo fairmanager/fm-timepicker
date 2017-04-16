@@ -28,7 +28,7 @@
 	"requireLineFeedAtFileEnd": true,
 	"requireLowerCaseAttributes": true,
 	"requireLowerCaseTags": true,
-	"requireSpaceAfterCodeOperator": true,
+	"requireSpaceAfterCodeOperator": null,
 	"requireSpacesInsideAttributeBrackets": null,
 	"requireSpecificAttributes": null,
 	"requireStrictEqualityOperators": true,
