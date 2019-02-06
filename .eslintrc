@@ -21,7 +21,7 @@
 			}
 		],
 		// disallow unnecessary parentheses
-		"no-extra-parens": 2,
+		"no-extra-parens": 0,
 		// disallow calling some Object.prototype methods directly on objects
 		"no-prototype-builtins": 2,
 		// disallow template literal placeholder syntax in regular strings
@@ -44,7 +44,7 @@
 		// enforce a maximum cyclomatic complexity allowed in a program
 		"complexity": 0,
 		// require return statements to either always or never specify values
-		"consistent-return": 0,
+		"consistent-return": 1,
 		// enforce consistent brace style for all control statements
 		"curly": [
 			2,
@@ -62,7 +62,7 @@
 		// require the use of === and !==
 		"eqeqeq": 2,
 		// require for-in loops to include an if statement
-		"guard-for-in": 2,
+		"guard-for-in": 0,
 		// disallow the use of alert, confirm, and prompt
 		"no-alert": 2,
 		// disallow the use of arguments.caller or arguments.callee
@@ -172,7 +172,7 @@
 		// require parentheses around immediate function invocations
 		"wrap-iife": 2,
 		// require or disallow “Yoda” conditions
-		"yoda": 1,
+		"yoda": 0,
 		// =================================================
 		// ==== Variables
 		// =================================================
@@ -194,12 +194,14 @@
 		// disallow initializing variables to undefined
 		"no-undef-init": 2,
 		// disallow the use of undefined as an identifier
-		"no-undefined": 2,
+		"no-undefined": 0,
 		// disallow unused variables
 		"no-unused-vars": [
 			1,
 			{
-				"argsIgnorePattern" : "error|request|response"
+				"args": "none",
+				"argsIgnorePattern": "error|request|response",
+				"vars": "all"
 			}
 		],
 		// disallow the use of variables before they are defined
@@ -327,8 +329,7 @@
 			{
 				"beforeColon": true,
 				"afterColon": true,
-				"mode": "strict",
-				"align": "colon"
+				"mode": "minimum"
 			}
 		],
 		// enforce consistent spacing before and after keywords
@@ -342,8 +343,20 @@
 						"before": false,
 						"after": true
 					},
+					"const": {
+						"before": false,
+						"after": true
+					},
+					"do": {
+						"before": false,
+						"after": true
+					},
 					"else": {
 						"before": true,
+						"after": true
+					},
+					"let": {
+						"before": false,
 						"after": true
 					},
 					"return": {
@@ -577,7 +590,7 @@
 		// =================================================
 		// require braces around arrow function bodies
 		"arrow-body-style": [
-			2,
+			1,
 			"as-needed"
 		],
 		// require parentheses around arrow function arguments
@@ -655,6 +668,18 @@
 		"yield-star-spacing": [
 			2,
 			"after"
-		]
-	}
+		],
+		"promise/always-return": "error",
+		"promise/no-return-wrap": "error",
+		"promise/param-names": "error",
+		"promise/catch-or-return": "error",
+		"promise/no-native": "error",
+		"promise/no-nesting": "warn",
+		"promise/no-promise-in-callback": "warn",
+		"promise/no-callback-in-promise": "warn",
+		"promise/avoid-new": "warn"
+	},
+	"plugins": [
+		"promise"
+	]
 }
