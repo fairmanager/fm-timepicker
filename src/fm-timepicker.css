@@ -1,0 +1,5 @@
+.fm-timepicker ul.dropdown-menu {
+    height: auto;
+    max-height: 160px;
+    overflow-y: scroll;
+}

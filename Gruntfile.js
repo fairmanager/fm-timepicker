@@ -42,6 +42,10 @@ module.exports = function( grunt ) {
 			},
 
 			copy : {
+				css : {
+					src  : "src/<%= pkg.name %>.css",
+					dest : "dist/<%= pkg.name %>.css"
+				},
 				hamster : {
 					src  : "bower_components/hamsterjs/hamster.js",
 					dest : "dist/hamster.js"

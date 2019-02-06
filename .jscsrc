@@ -17,7 +17,6 @@
 		"if",
 		"for",
 		"while",
-		"do",
 		"switch",
 		"catch"
 	],
@@ -113,7 +112,8 @@
 		"all": true
 	},
 	"safeContextKeyword": [
-		"self"
+		"self",
+		"vm"
 	],
 	"validateLineBreaks": "LF",
 	"validateParameterSeparator": ", ",
